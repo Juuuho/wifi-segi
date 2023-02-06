@@ -42,7 +42,7 @@ class SIG_MONITOR(Thread):
             y_val.append(rssi)
             info = f"rssi={rssi:2}dBm, dst={dst_mac}, src={src_mac}, ap={ap_mac}"
             
-            # 주석은 디버깅 용
+            # 디버깅
             if p.haslayer(Dot11ProbeResp):
                 ssid = codecs.decode(p[Dot11Elt].info, 'utf-8')
             #     channel = ord(p[Dot11Elt:3].info)
@@ -63,11 +63,9 @@ class SIG_MONITOR(Thread):
 def animate(i):
     global cnt
     global rssi
-    parameters = {'figure.titlesize': 5}
-    plt.rcParams.update(parameters)
     plt.cla()
     plt.plot(x_val, y_val)
-    plt.xlabel('Packet Count')
+    plt.xlabel('Packet Count', fontsize=8)
     plt.ylim(0, -100)
     plt.legend(['dBm'])
     plt.title('Target: '+ssid+"("+mac+")", fontsize=13)
@@ -86,7 +84,6 @@ if __name__ == "__main__":
     
     sigmon = SIG_MONITOR()
     sigmon.start()
-    # sniff(iface=argument[0], prn=handler, store=False)
     
     ani = FuncAnimation(plt.gcf(), animate, interval = 100)
     plt.show()
