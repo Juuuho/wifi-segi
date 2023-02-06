@@ -66,7 +66,7 @@ def animate(i):
     plt.cla()
     plt.plot(x_val, y_val)
     plt.xlabel('Packet Count', fontsize=8)
-    plt.ylim(0, -100)
+    plt.ylim(-100, 0)
     plt.legend(['dBm'])
     plt.title('Target: '+ssid+"("+mac+")", fontsize=13)
 
